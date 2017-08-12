@@ -119,7 +119,7 @@ def set_update_ltcusd_btce(source):
 ###############
 # Bitinka
 ###############
-# Update BTC with BitFinex
+# Update BTC with Bitinka
 def update_btcars_bitinka():
     url = r"https://www.bitinka.com.ar/api/apinka/ticker?format=json"
     response = urllib.urlopen(url)
@@ -136,7 +136,7 @@ def set_update_btcars_bitinka(source):
 ###############
 # Ripio
 ###############
-# Update BTC with BitFinex
+# Update BTC with Ripio
 def update_btcars_ripio():
     url = r"https://www.ripio.com/api/v1/rates/"
     response = urllib.urlopen(url)
@@ -153,7 +153,7 @@ def set_update_btcars_ripio(source):
 ###############
 # SatoshiTango
 ###############
-# Update BTC with BitFinex
+# Update BTC with SatoshiTango
 def update_btcars_satoshitango():
     url = r"https://api.satoshitango.com/v2/ticker"
     response = urllib.urlopen(url)
