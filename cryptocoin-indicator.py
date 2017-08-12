@@ -117,6 +117,23 @@ def set_update_ltcusd_btce(source):
     currentupdate = update_ltcusd_btce
 
 ###############
+# Bitinka
+###############
+# Update BTC with BitFinex
+def update_btcars_bitinka():
+    url = r"https://www.bitinka.com.ar/api/apinka/ticker?format=json"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["ARS"]["ask"]
+    price = str(round(float(price), 3))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_bitinka(source):
+    global currentupdate
+    currentupdate = update_btcars_bitinka
+
+###############
 # Ripio
 ###############
 # Update BTC with BitFinex
@@ -199,11 +216,15 @@ def build_menu():
     # Separator
     menu.append(gtk.SeparatorMenuItem())
 
-    btcars_ripio = gtk.MenuItem("ARS: Ripio")
+    btcars_bitinka = gtk.MenuItem("BTCARS: Bitinka")
+    btcars_bitinka.connect("activate", set_update_btcars_bitinka)
+    menu.append(btcars_bitinka)
+
+    btcars_ripio = gtk.MenuItem("BTCARS: Ripio")
     btcars_ripio.connect("activate", set_update_btcars_ripio)
     menu.append(btcars_ripio)
 
-    btcars_satoshitango = gtk.MenuItem("ARS: SatoshiTango")
+    btcars_satoshitango = gtk.MenuItem("BTCARS: SatoshiTango")
     btcars_satoshitango.connect("activate", set_update_btcars_satoshitango)
     menu.append(btcars_satoshitango)
 
