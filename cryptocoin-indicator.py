@@ -256,7 +256,7 @@ def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     # Update prices every 2 seconds
-    updatetimer = gobject.timeout_add(2000, update_price, indicator)
+    updatetimer = gobject.timeout_add(20000, update_price, indicator)
 
     # Start main loop
     gtk.main()
