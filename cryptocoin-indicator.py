@@ -116,6 +116,22 @@ def set_update_ltcusd_btce(source):
     global currentupdate
     currentupdate = update_ltcusd_btce
 
+###############
+# Ripio
+###############
+# Update BTC with BitFinex
+def update_btcars_ripio():
+    url = r"https://www.ripio.com/api/v1/rates/"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["rates"]["ARS_BUY"]
+    price = str(round(float(price), 3))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_ripio(source):
+    global currentupdate
+    currentupdate = update_btcars_ripio
 
 ##############################
 # Initialization
@@ -162,6 +178,13 @@ def build_menu():
     ltcusd_btce = gtk.MenuItem("LTCUSD: BTC-e")
     ltcusd_btce.connect("activate", set_update_ltcusd_btce)
     menu.append(ltcusd_btce)
+
+    # Separator
+    menu.append(gtk.SeparatorMenuItem())
+
+    btcars_ripio = gtk.MenuItem("ARS: Ripio")
+    btcars_ripio.connect("activate", set_update_btcars_ripio)
+    menu.append(btcars_ripio)
 
     # Separator
     menu.append(gtk.SeparatorMenuItem())
