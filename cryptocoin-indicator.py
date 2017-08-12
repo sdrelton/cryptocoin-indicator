@@ -142,7 +142,7 @@ def update_btcars_ripio():
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     price = data["rates"]["ARS_BUY"]
-    price = str(round(float(price), 3))
+    price = str(round(float(price), 2))
     mystring = "BTCARS: " + price
     return mystring
 
