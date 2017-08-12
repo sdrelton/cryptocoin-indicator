@@ -133,6 +133,23 @@ def set_update_btcars_ripio(source):
     global currentupdate
     currentupdate = update_btcars_ripio
 
+###############
+# SatoshiTango
+###############
+# Update BTC with BitFinex
+def update_btcars_satoshitango():
+    url = r"https://api.satoshitango.com/v2/ticker"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["data"]["compra"]["arsbtc"]
+    price = str(round(float(price), 3))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_satoshitango(source):
+    global currentupdate
+    currentupdate = update_btcars_satoshitango
+
 ##############################
 # Initialization
 ##############################
@@ -185,6 +202,10 @@ def build_menu():
     btcars_ripio = gtk.MenuItem("ARS: Ripio")
     btcars_ripio.connect("activate", set_update_btcars_ripio)
     menu.append(btcars_ripio)
+
+    btcars_satoshitango = gtk.MenuItem("ARS: SatoshiTango")
+    btcars_satoshitango.connect("activate", set_update_btcars_satoshitango)
+    menu.append(btcars_satoshitango)
 
     # Separator
     menu.append(gtk.SeparatorMenuItem())
