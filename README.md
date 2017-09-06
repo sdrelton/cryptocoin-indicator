@@ -18,6 +18,9 @@ The following currency pairs and exchanges are currently supported.
 |   BTC-e    |     BTCUSD     |
 |            |     ETHBTC     |
 |            |     LTCUSD     |
+|   Bitinka  |     BTCARS     |
+|   RIPIO    |     BTCARS     |
+|SatoshiTango|     BTCARS     |
 
 It is very simple to add new currency pairs, which need not involve a cryptocurrency.
 

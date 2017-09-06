@@ -116,6 +116,56 @@ def set_update_ltcusd_btce(source):
     global currentupdate
     currentupdate = update_ltcusd_btce
 
+###############
+# Bitinka
+###############
+# Update BTC with Bitinka
+def update_btcars_bitinka():
+    url = r"https://www.bitinka.com.ar/api/apinka/ticker?format=json"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["ARS"]["ask"]
+    price = str(round(float(price), 3))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_bitinka(source):
+    global currentupdate
+    currentupdate = update_btcars_bitinka
+
+###############
+# Ripio
+###############
+# Update BTC with Ripio
+def update_btcars_ripio():
+    url = r"https://www.ripio.com/api/v1/rates/"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["rates"]["ARS_BUY"]
+    price = str(round(float(price), 2))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_ripio(source):
+    global currentupdate
+    currentupdate = update_btcars_ripio
+
+###############
+# SatoshiTango
+###############
+# Update BTC with SatoshiTango
+def update_btcars_satoshitango():
+    url = r"https://api.satoshitango.com/v2/ticker"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    price = data["data"]["compra"]["arsbtc"]
+    price = str(round(float(price), 3))
+    mystring = "BTCARS: " + price
+    return mystring
+
+def set_update_btcars_satoshitango(source):
+    global currentupdate
+    currentupdate = update_btcars_satoshitango
 
 ##############################
 # Initialization
@@ -166,6 +216,21 @@ def build_menu():
     # Separator
     menu.append(gtk.SeparatorMenuItem())
 
+    btcars_bitinka = gtk.MenuItem("BTCARS: Bitinka")
+    btcars_bitinka.connect("activate", set_update_btcars_bitinka)
+    menu.append(btcars_bitinka)
+
+    btcars_ripio = gtk.MenuItem("BTCARS: Ripio")
+    btcars_ripio.connect("activate", set_update_btcars_ripio)
+    menu.append(btcars_ripio)
+
+    btcars_satoshitango = gtk.MenuItem("BTCARS: SatoshiTango")
+    btcars_satoshitango.connect("activate", set_update_btcars_satoshitango)
+    menu.append(btcars_satoshitango)
+
+    # Separator
+    menu.append(gtk.SeparatorMenuItem())
+
     # Quit
     item_quit = gtk.MenuItem("Quit")
     item_quit.connect("activate", quit)
@@ -191,7 +256,7 @@ def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     # Update prices every 2 seconds
-    updatetimer = gobject.timeout_add(2000, update_price, indicator)
+    updatetimer = gobject.timeout_add(20000, update_price, indicator)
 
     # Start main loop
     gtk.main()
